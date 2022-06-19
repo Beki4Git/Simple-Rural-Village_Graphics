@@ -32,7 +32,6 @@ class OBJ:
             elif mtl is None:
                 raise ValueError("mtl file doesn't start with newmtl stmt")
             elif values[0] == 'map_Kd':
-                # load the texture referred to by this declaration
                 mtl[values[0]] = values[1]
                 imagefile = os.path.join(dirname, mtl['map_Kd'])
                 mtl['texture_Kd'] = cls.loadTexture(imagefile)
@@ -99,10 +98,10 @@ class OBJ:
 
             mtl = self.mtl[material]
             if 'texture_Kd' in mtl:
-                # use diffuse texmap
+          
                 glBindTexture(GL_TEXTURE_2D, mtl['texture_Kd'])
             else:
-                # just use diffuse colour
+        
                 glColor(*mtl['Kd'])
 
             glBegin(GL_POLYGON)
